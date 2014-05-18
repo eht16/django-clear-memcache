@@ -20,6 +20,7 @@ setup(
     author='Enrico Tröger',
     author_email='enrico.troeger@uvena.de',
     url='https://github.com/eht16/django-clear-memcache',
+    download_url='https://github.com/eht16/django-clear-memcache/archive/django-clear-memcache-%s.tar.gz' % VERSION,
     packages=find_packages(),
     license = "BSD",
     include_package_data=True,
