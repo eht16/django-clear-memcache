@@ -1,0 +1,29 @@
+
+.cache-count {
+    text-align: right;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+#app_content.module {
+    width: 50%;
+}
+
+#app_content.module table {
+    width: 100%;
+}
+
+#app_content.module td {
+    vertical-align: middle;
+}
+
+div.spacer {
+    height: 50px;
+}
+
+
+.caption-right {
+    display: inline;
+    float: right;
+}

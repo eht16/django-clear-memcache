@@ -1,0 +1,10 @@
+*.egg
+*.egg-info
+*.log
+*.pot
+*.pyc
+/build/
+/dist/
+/env/
+/venv/
+local_settings.py

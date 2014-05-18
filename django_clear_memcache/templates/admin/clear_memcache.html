@@ -1,0 +1,92 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n admin_list admin_static %}
+
+{% block extrastyle %}
+{{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/clear_memcache.css" %}" />
+{% endblock %}
+
+
+{% block content %}
+{{ block.super }}
+{% if no_cache_found %}
+    <p>
+        {% trans "No suitable cache found, please check your configuration" %}
+    </p>
+{% else %}
+<form method="post" action="{% url 'admin:clear_cache' %}" enctype="multipart/form-data">
+{% csrf_token %}
+<div id="app_content" class="module">
+   <table>
+       <caption>
+            {% trans "Cache Items" %}
+            <span class="caption-right"><a href="">{% trans "Refresh" %}</a>
+       </caption>
+       <tbody>
+            <tr>
+               <td width="100%">{% blocktrans %}Using site prefix "{{ cache_key_prefix }}":{% endblocktrans %}</td>
+               <td class="cache-count">{{ cache_keys_prefix_count }}</td>
+               <td><input class="default" type="submit" name="clear_prefix" value="{% blocktrans %}Clear '{{ cache_key_prefix }}' items{% endblocktrans %}"/></td>
+           </tr>
+            <tr>
+               <td width="100%">{% trans "Whole cache:" %}</td>
+               <td class="cache-count">{{ cache_key_count }}</td>
+               <td><input class="default" type="submit" name="clear_all" value="{% trans "Clear all cache items" %}"/></td>
+           </tr>
+        </tbody>
+    </table>
+</div>
+</form>
+
+<div id="cache_key_details">
+    <div class="spacer"></div>
+
+    <div id="app_content" class="module">
+       <table>
+           <caption>
+               {% blocktrans %}Cache Keys for site prefix "{{ cache_key_prefix }}"{% endblocktrans %}
+               <span class="caption-right"><a href="#" id="refresh_link">{% trans "Load" %}</a></span>
+            </caption>
+           <tbody id="cache_keys_table">
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+
+{% if not no_cache_found %}
+<script>
+/* load cache key items only if jQuery is loaded */
+if (window.jQuery) {
+    function get_cache_items() {
+        var url = "{% url 'admin:cache_list_keys' %}";
+        jQuery.ajax({
+            url: url,
+            dataType: "json",
+            success: function (data) {
+                var table_body = "";
+                for (var i = 0; i < data.length; i++) {
+                    key = data[i];
+                    table_body += "<tr><td>" + key + "</td></tr>\n";
+                }
+                jQuery("#cache_keys_table").html(table_body);
+                jQuery("#refresh_link").html("{% trans "Refresh" %}");
+            }
+        });
+    };
+
+    jQuery(document).ready(function () {
+        jQuery("#refresh_link").click(get_cache_items)
+    });
+}
+else {
+    var cache_key_details = document.getElementById('cache_key_details');
+    cache_key_details.style.display = 'none';
+}
+</script>
+{% endif %}
+{% endblock %}
