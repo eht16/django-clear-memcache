@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 NAME = 'django-clear-memcache'
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 DESCRIPTION = """\
 Allow to clear Memcache items for the current site (according to the cache key prefix)
