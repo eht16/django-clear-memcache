@@ -29,6 +29,16 @@ even the whole Memcache server.
 Furthermore, you can list known items in the cache for the configured `KEY_PREFIX`.
 
 
+Changes
+=======
+
+* 2014-05-24:
+    * Include templates and static files
+
+* 2014-05-18:
+    * Initial release
+
+
 License
 =======
 
