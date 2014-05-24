@@ -32,7 +32,7 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 License
 =======
 
-Copyright (c) 2014, Enrico Tröger <enrico(dot)troeger(at)uvena(dot)de>
+Copyright (c) 2014, Enrico Tröger
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
