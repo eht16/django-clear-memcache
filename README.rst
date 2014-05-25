@@ -13,7 +13,7 @@ Installation
 
     pip install django-clear-memcache
 
-- Add to `django_clear_memcache` to `INSTALLED_APPS`
+- Add `django_clear_memcache` to `INSTALLED_APPS`
 
 - If not already done, configure `CACHES` to have a default cache
   with one of the supported Memcache backends (`django.core.cache.backends.memcached.*`)
