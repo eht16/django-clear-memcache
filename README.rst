@@ -32,10 +32,14 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
-* 2014-05-24:
+* 2014-12-09 - 1.1.0:
+    * Django 1.7 support
+    * Find also namespaced jQuery
+
+* 2014-05-24 - 1.0.1:
     * Include templates and static files
 
-* 2014-05-18:
+* 2014-05-18 - 1.0.0:
     * Initial release
 
 
