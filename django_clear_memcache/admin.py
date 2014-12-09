@@ -17,10 +17,12 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
     change_list_template = 'admin/clear_memcache.html'
 
     #----------------------------------------------------------------------
-    def queryset(self, request):
+    def get_queryset(self, request):
         """Override queryset to return a simple empty queryset
            as we do not really have a real model anyway"""
         return ClearMemcache.objects.none()
+
+    queryset = get_queryset
 
     #----------------------------------------------------------------------
     def has_add_permission(self, request):

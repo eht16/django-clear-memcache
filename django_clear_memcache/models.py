@@ -11,6 +11,6 @@ class ClearMemcache(models.Model):
 
     class Meta:
         managed = False
-        app_label = u'clear_memcache'
+        app_label = u'django_clear_memcache'
         verbose_name = _(u'Clear Memcache')
         verbose_name_plural = _(u'Clear Memcache')
