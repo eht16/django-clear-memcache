@@ -4,7 +4,6 @@
 
 from django_clear_memcache.utility import MemcachedUtility
 from django.conf import settings
-from django.core.cache.backends.memcached import BaseMemcachedCache
 from django.core.cache import cache, DEFAULT_CACHE_ALIAS
 from django.core.exceptions import ImproperlyConfigured
 from django.utils import six
@@ -29,7 +28,10 @@ class ClearMemcacheController(object):
 
     #----------------------------------------------------------------------
     def _init(self):
-        if not isinstance(cache, BaseMemcachedCache):
+        # support django-debug-toolbar which wraps the cache instance
+        cache_ = getattr(cache, 'cache', cache)
+        # check if we got a usable cache instance
+        if not hasattr(cache_, '_lib'):
             raise ClearMemcacheNoCacheFoundError(u'Unknown memcached backend or no memcached backend found')
 
         # get cache key prefix
