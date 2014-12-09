@@ -61,32 +61,35 @@
 {% if not no_cache_found %}
 <script>
 /* load cache key items only if jQuery is loaded */
-if (window.jQuery) {
-    function get_cache_items() {
-        var url = "{% url 'admin:cache_list_keys' %}";
-        jQuery.ajax({
-            url: url,
-            dataType: "json",
-            success: function (data) {
-                var table_body = "";
-                for (var i = 0; i < data.length; i++) {
-                    key = data[i];
-                    table_body += "<tr><td>" + key + "</td></tr>\n";
+document.addEventListener("DOMContentLoaded", function(event) {
+    if (window.jQuery || django.jQuery) {
+        my_jquery = window.jQuery || django.jQuery;
+        function get_cache_items() {
+            var url = "{% url 'admin:cache_list_keys' %}";
+            my_jquery.ajax({
+                url: url,
+                dataType: "json",
+                success: function (data) {
+                    var table_body = "";
+                    for (var i = 0; i < data.length; i++) {
+                        key = data[i];
+                        table_body += "<tr><td>" + key + "</td></tr>\n";
+                    }
+                    my_jquery("#cache_keys_table").html(table_body);
+                    my_jquery("#refresh_link").html("{% trans "Refresh" %}");
                 }
-                jQuery("#cache_keys_table").html(table_body);
-                jQuery("#refresh_link").html("{% trans "Refresh" %}");
-            }
-        });
-    };
+            });
+        };
 
-    jQuery(document).ready(function () {
-        jQuery("#refresh_link").click(get_cache_items)
-    });
-}
-else {
-    var cache_key_details = document.getElementById('cache_key_details');
-    cache_key_details.style.display = 'none';
-}
+        my_jquery(document).ready(function () {
+            my_jquery("#refresh_link").click(get_cache_items)
+        });
+    }
+    else {
+        var cache_key_details = document.getElementById('cache_key_details');
+        cache_key_details.style.display = 'none';
+    }
+});
 </script>
 {% endif %}
 {% endblock %}
