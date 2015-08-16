@@ -46,10 +46,18 @@ class ClearMemcacheController(object):
         self._servers = list()
         for server in servers:
             host, port = server.split(':')
+            port = self._parse_port(port)
             if self._host == u'unix':
                 # for now, ignore unix domain sockets
                 continue
             self._servers.append((host, port))
+
+    #----------------------------------------------------------------------
+    def _parse_port(self, port):
+        try:
+            return int(port)
+        except (ValueError, TypeError), e:
+            raise ClearMemcacheNoCacheFoundError(u'Unable to parse port "%s": %e' % (port, e))
 
     #----------------------------------------------------------------------
     def keys(self, use_prefix=True, refresh=False):
