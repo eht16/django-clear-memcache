@@ -32,6 +32,10 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
+* 2015-08-16 - 1.1.1:
+    * Case memcached port number to an integer
+      (to fix connection errors in telnetlib)
+
 * 2014-12-09 - 1.1.0:
     * Django 1.7 support
     * Find also namespaced jQuery
