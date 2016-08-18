@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.contrib import admin
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -37,11 +37,10 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
     #----------------------------------------------------------------------
     def get_urls(self):
         urls = admin.ModelAdmin.get_urls(self)
-        my_urls = patterns(
-            '',
+        my_urls = [
             url(r'^clear/$', self.admin_site.admin_view(self.clear), name='clear_cache'),
             url(r'^list/$', self.admin_site.admin_view(self.list_cache_items), name='cache_list_keys'),
-        )
+        ]
         return my_urls + urls
 
     #----------------------------------------------------------------------
