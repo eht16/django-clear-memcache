@@ -32,6 +32,14 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
+* 2016-08-18 - 1.2.1:
+    * Replace NoArgsCommand with BaseCommand
+      (for Django 1.10 support)
+
+* 2016-08-18 - 1.2.0:
+    * Drop deprecated django.conf.urls.patterns
+      (for Django 1.10 support)
+
 * 2015-08-16 - 1.1.1:
     * Case memcached port number to an integer
       (to fix connection errors in telnetlib)
@@ -50,7 +58,7 @@ Changes
 License
 =======
 
-Copyright (c) 2014, Enrico Tröger
+Copyright (c) 2016, Enrico Tröger
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
