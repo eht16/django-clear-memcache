@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from django_clear_memcache.clear import ClearMemcacheController
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 
 ########################################################################
-class Command(NoArgsCommand):
+class Command(BaseCommand):
 
     help = ("Clear all keys from the configured default memcache server using the configured prefix")
     can_import_settings = True
 
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         verbosity = int(options.get("verbosity", 0))
 
         controller = ClearMemcacheController()
