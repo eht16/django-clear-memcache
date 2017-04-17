@@ -49,7 +49,7 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
         use_prefix = 'clear_prefix' in request.POST
         clear_cache_controller = ClearMemcacheController()
         clear_cache_controller.clear_cache(use_prefix=use_prefix)
-        self.message_user(request, _(u'Cache has been cleared'), fail_silently=True)
+        self.message_user(request, _('Cache has been cleared'), fail_silently=True)
         # redirect back to the changelist page
         changelist_url = self._admin_url('changelist')
         return HttpResponseRedirect(changelist_url)
@@ -71,7 +71,7 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
     #----------------------------------------------------------------------
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or dict()
-        extra_context['title'] = _(u'Clear Memcache')
+        extra_context['title'] = _('Clear Memcache')
         try:
             # query the cache
             clear_cache_controller = ClearMemcacheController()

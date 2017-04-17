@@ -32,6 +32,9 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
+* 2017-04-17 - 1.3.0:
+    * Support Python3
+
 * 2016-08-18 - 1.2.1:
     * Replace NoArgsCommand with BaseCommand
       (for Django 1.10 support)
@@ -58,7 +61,7 @@ Changes
 License
 =======
 
-Copyright (c) 2016, Enrico Tröger
+Copyright (c) 2017, Enrico Tröger
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

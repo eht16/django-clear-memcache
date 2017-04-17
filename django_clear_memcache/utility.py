@@ -16,9 +16,9 @@ class MemcachedUtility(object):
     A small utility to control a memcached server via its telnet interface.
     """
 
-    _key_regex = re.compile(ur'ITEM (.*) \[(.*); (.*)\]')
-    _slab_regex = re.compile(ur'STAT items:(.*):number')
-    _stat_regex = re.compile(ur"STAT (.*) (.*)\r")
+    _key_regex = re.compile(r'ITEM (.*) \[(.*); (.*)\]')
+    _slab_regex = re.compile(r'STAT items:(.*):number')
+    _stat_regex = re.compile(r"STAT (.*) (.*)\r")
 
     #----------------------------------------------------------------------
     def __init__(self, host, port):
@@ -41,17 +41,20 @@ class MemcachedUtility(object):
     def command(self, cmd, read_until='END'):
         """Write a command to telnet and return the response"""
         self._logger.debug(
-            u'[%12s] executing memcache command(%-10s): %s',
+            '[%12s] executing memcache command(%-10s): %s',
             self._host, repr(read_until), cmd)
-        self._client.write("%s\n" % cmd)
-        return self._client.read_until(read_until, TELNET_READ_TIMEOUT)
+        command = '{}\n'.format(cmd)
+        self._client.write(command.encode())
+        read_until_bytes = read_until.encode()
+        response = self._client.read_until(read_until_bytes, TELNET_READ_TIMEOUT)
+        return response.decode()
 
     #----------------------------------------------------------------------
     def key_details(self, sort=True, limit=100):
         """Return a list of tuples containing keys and details"""
-        cmd = 'stats cachedump %s %s'
+        cmd = 'stats cachedump {} {}'
         keys = [key for id_ in self.slab_ids()
-                for key in self._key_regex.findall(self.command(cmd % (id_, limit)))]
+                for key in self._key_regex.findall(self.command(cmd.format(id_, limit)))]
         if sort:
             return sorted(keys)
         else:
@@ -60,7 +63,7 @@ class MemcachedUtility(object):
     #----------------------------------------------------------------------
     def get(self, key):
         """Retrieve a single key"""
-        return self.command('get %s' % key)
+        return self.command('get {}'.format(key))
 
     #----------------------------------------------------------------------
     def flush(self):
@@ -84,6 +87,6 @@ class MemcachedUtility(object):
 
     #----------------------------------------------------------------------
     def delete(self, key):
-        result = self.command('delete %s' % key, read_until='\n')
+        result = self.command('delete {}'.format(key), read_until='\n')
         result = result.strip()
-        self._logger.debug(u'Delete for key %s returned: %s', key, result)
+        self._logger.debug('Delete for key %s returned: %s', key, result)

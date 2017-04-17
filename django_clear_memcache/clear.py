@@ -32,7 +32,8 @@ class ClearMemcacheController(object):
         cache_ = getattr(cache, 'cache', cache)
         # check if we got a usable cache instance
         if not hasattr(cache_, '_lib'):
-            raise ClearMemcacheNoCacheFoundError(u'Unknown memcached backend or no memcached backend found')
+            raise ClearMemcacheNoCacheFoundError(
+                'Unknown memcached backend or no memcached backend found')
 
         # get cache key prefix
         self._cache_key_prefix = cache.key_prefix
@@ -47,7 +48,7 @@ class ClearMemcacheController(object):
         for server in servers:
             host, port = server.split(':')
             port = self._parse_port(port)
-            if self._host == u'unix':
+            if self._host == 'unix':
                 # for now, ignore unix domain sockets
                 continue
             self._servers.append((host, port))
@@ -56,8 +57,8 @@ class ClearMemcacheController(object):
     def _parse_port(self, port):
         try:
             return int(port)
-        except (ValueError, TypeError), e:
-            raise ClearMemcacheNoCacheFoundError(u'Unable to parse port "%s": %e' % (port, e))
+        except (ValueError, TypeError) as e:
+            raise ClearMemcacheNoCacheFoundError('Unable to parse port "{}": {}'.format(port, e))
 
     #----------------------------------------------------------------------
     def keys(self, use_prefix=True, refresh=False):
@@ -69,7 +70,7 @@ class ClearMemcacheController(object):
                     utility = MemcachedUtility(self._host, self._port)
                     utility.open()
                     # search for keys, according to the configured prefix
-                    server_keys = utility.keys()
+                    server_keys = list(utility.keys())
                     self._keys.extend(server_keys)
                 finally:
                     utility.close()
@@ -102,7 +103,7 @@ class ClearMemcacheController(object):
         utility = MemcachedUtility(self._host, self._port)
         utility.open()
         try:
-            for key in utility.keys():
+            for key in list(utility.keys()):
                 key = key.strip()
                 if key.startswith(self._cache_key_prefix):
                     utility.delete(key)
@@ -117,7 +118,7 @@ class ClearMemcacheController(object):
             utility.flush()
             # now iterate over all remaining keys and retrieve them to finally clear them from
             # the cache, otherwise they would still show up even if already flushed
-            for key in utility.keys():
+            for key in list(utility.keys()):
                 utility.get(key)
         finally:
             utility.close()
