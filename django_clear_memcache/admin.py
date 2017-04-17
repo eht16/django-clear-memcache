@@ -16,7 +16,7 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
     model = ClearMemcache
     change_list_template = 'admin/clear_memcache.html'
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def get_queryset(self, request):
         """Override queryset to return a simple empty queryset
            as we do not really have a real model anyway"""
@@ -24,17 +24,17 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
 
     queryset = get_queryset
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def has_add_permission(self, request):
         """A fake model should not be added"""
         return False
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def has_delete_permission(self, request, obj=None):
         """A fake model should not be added"""
         return False
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def get_urls(self):
         urls = admin.ModelAdmin.get_urls(self)
         my_urls = [
@@ -43,7 +43,7 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
         ]
         return my_urls + urls
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def clear(self, request):
         # clear the cache
         use_prefix = 'clear_prefix' in request.POST
@@ -54,7 +54,7 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
         changelist_url = self._admin_url('changelist')
         return HttpResponseRedirect(changelist_url)
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def list_cache_items(self, request):
         clear_cache_controller = ClearMemcacheController()
         cache_keys_prefix = clear_cache_controller.keys(use_prefix=True)
@@ -62,13 +62,13 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
         json_ = json.dumps(cache_keys_prefix)
         return HttpResponse(json_, content_type='application/json')
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _admin_url(self, target_url):
         opts = self.model._meta
         url_ = "admin:%s_%s_%s" % (opts.app_label, opts.object_name.lower(), target_url)
         return reverse(url_)
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def changelist_view(self, request, extra_context=None):
         extra_context = extra_context or dict()
         extra_context['title'] = _('Clear Memcache')

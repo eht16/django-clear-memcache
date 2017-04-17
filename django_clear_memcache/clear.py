@@ -17,7 +17,7 @@ class ClearMemcacheNoCacheFoundError(ImproperlyConfigured):
 ########################################################################
 class ClearMemcacheController(object):
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def __init__(self):
         self._servers = None
         self._host = None
@@ -26,7 +26,7 @@ class ClearMemcacheController(object):
         self._keys = None
         self._init()
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _init(self):
         # support django-debug-toolbar which wraps the cache instance
         cache_ = getattr(cache, 'cache', cache)
@@ -53,14 +53,14 @@ class ClearMemcacheController(object):
                 continue
             self._servers.append((host, port))
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _parse_port(self, port):
         try:
             return int(port)
         except (ValueError, TypeError) as e:
             raise ClearMemcacheNoCacheFoundError('Unable to parse port "{}": {}'.format(port, e))
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def keys(self, use_prefix=True, refresh=False):
         # cache keys per instance
         if self._keys is None or refresh:
@@ -85,7 +85,7 @@ class ClearMemcacheController(object):
 
         return keys
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def clear_cache(self, use_prefix=True):
         if use_prefix:
             # iterate over all caches and delete single keys
@@ -98,7 +98,7 @@ class ClearMemcacheController(object):
                 # clear this cache
                 self._flush()
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _clear(self):
         utility = MemcachedUtility(self._host, self._port)
         utility.open()
@@ -110,7 +110,7 @@ class ClearMemcacheController(object):
         finally:
             utility.close()
 
-    #----------------------------------------------------------------------
+    # ----------------------------------------------------------------------
     def _flush(self):
         utility = MemcachedUtility(self._host, self._port)
         utility.open()
