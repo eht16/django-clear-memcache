@@ -9,6 +9,10 @@ The app integrates into Django's admin interface for easy use.
 Installation
 ============
 
+- Dependencies
+
+  - Django 2.1 or newer
+
 - Install:
 
     pip install django-clear-memcache
@@ -31,6 +35,9 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 
 Changes
 =======
+
+* 2020-04-22 - 1.4.1:
+    * Support Django 3.0
 
 * 2020-04-22 - 1.4.0:
     * Support Django 2.x (#2, Andres Vargas)
