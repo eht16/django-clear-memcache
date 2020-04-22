@@ -32,6 +32,9 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
+* 2020-04-22 - 1.4.0:
+    * Support Django 2.x (#2, Andres Vargas)
+
 * 2017-04-17 - 1.3.0:
     * Support Python3
 

@@ -5,7 +5,7 @@ from shutil import rmtree
 from setuptools import setup, find_packages
 
 NAME = 'django-clear-memcache'
-VERSION = '1.3.0'
+VERSION = '1.4.0'
 
 if 'bdist_wheel' in sys.argv:
     # Remove previous build dir when creating a wheel build, since if files have been removed
@@ -14,7 +14,7 @@ if 'bdist_wheel' in sys.argv:
     for directory in ('build', 'dist', 'django_clear_memcache.egg-info'):
         try:
             rmtree(directory)
-        except:
+        except Exception:
             pass
 
 
@@ -33,7 +33,6 @@ setup(
     include_package_data=True,
     zip_safe=False,
     requires=['django'],
-    setup_requires=['flake8'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
