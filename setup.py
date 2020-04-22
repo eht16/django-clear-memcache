@@ -32,7 +32,7 @@ setup(
     license="BSD",
     include_package_data=True,
     zip_safe=False,
-    requires=['django'],
+    install_requires=['django>2.1'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

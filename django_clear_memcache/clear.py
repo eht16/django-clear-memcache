@@ -5,7 +5,7 @@
 from django.conf import settings
 from django.core.cache import cache, DEFAULT_CACHE_ALIAS
 from django.core.exceptions import ImproperlyConfigured
-from django.utils import six
+import six
 
 from django_clear_memcache.utility import MemcachedUtility
 
