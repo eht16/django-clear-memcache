@@ -1,17 +1,21 @@
 # coding: utf-8
 
+import json
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.core.cache import cache
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
+
 from django_clear_memcache.clear import ClearMemcacheController, ClearMemcacheNoCacheFoundError
 from django_clear_memcache.models import ClearMemcache
-import json
+
+
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 
 ########################################################################

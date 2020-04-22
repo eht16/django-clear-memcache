@@ -2,11 +2,12 @@
 
 # MemcachedUtility is loosely based on https://github.com/dlrust/python-memcached-stats
 
-from django_clear_memcache.utility import MemcachedUtility
 from django.conf import settings
 from django.core.cache import cache, DEFAULT_CACHE_ALIAS
 from django.core.exceptions import ImproperlyConfigured
 from django.utils import six
+
+from django_clear_memcache.utility import MemcachedUtility
 
 
 ########################################################################

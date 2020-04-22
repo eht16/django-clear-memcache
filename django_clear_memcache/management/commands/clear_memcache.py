@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from django_clear_memcache.clear import ClearMemcacheController
 from django.core.management.base import BaseCommand
+
+from django_clear_memcache.clear import ClearMemcacheController
 
 
 ########################################################################

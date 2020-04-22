@@ -6,11 +6,6 @@ from setuptools import setup, find_packages
 
 NAME = 'django-clear-memcache'
 VERSION = '1.3.0'
-DESCRIPTION = """\
-Allow to clear Memcache items for the current site (according to the cache key prefix)
-or even to clear the whole configured Memcache server.
-The app integrates into Django's admin interface for easy use.
-"""
 
 if 'bdist_wheel' in sys.argv:
     # Remove previous build dir when creating a wheel build, since if files have been removed
@@ -25,8 +20,9 @@ if 'bdist_wheel' in sys.argv:
 
 setup(
     name=NAME,
-    description=DESCRIPTION,
+    description='Allow to easily clear Memcache items in Django\'s admin interface.',
     long_description=open('README.rst').read(),
+    long_description_content_type='text/x-rst',
     version=VERSION,
     author='Enrico Tröger',
     author_email='enrico.troeger@uvena.de',
