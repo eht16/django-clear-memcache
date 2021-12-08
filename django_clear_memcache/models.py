@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+
+try:
+    #django 4.x
+    from django.utils.translation import gettext_lazy as _
+except ImportError:
+    # Older Versions
+    from django.utils.translation import ugettext_lazy as _
 
 
 ########################################################################
