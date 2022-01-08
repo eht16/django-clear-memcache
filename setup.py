@@ -5,7 +5,7 @@ from shutil import rmtree
 from setuptools import setup, find_packages
 
 NAME = 'django-clear-memcache'
-VERSION = '1.4.2'
+VERSION = '1.4.3'
 
 if 'bdist_wheel' in sys.argv:
     # Remove previous build dir when creating a wheel build, since if files have been removed

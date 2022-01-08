@@ -36,8 +36,11 @@ Furthermore, you can list known items in the cache for the configured `KEY_PREFI
 Changes
 =======
 
-* 2021-01-08 - 1.4.2:
-    * Support Django 4.0 (#3,  Daniel Eriksson)
+* 2022-01-08 - 1.4.3:
+    * Fix release date
+
+* 2022-01-08 - 1.4.2:
+    * Support Django 4.0 (#3, Daniel Eriksson)
 
 * 2020-04-22 - 1.4.1:
     * Support Django 3.0
