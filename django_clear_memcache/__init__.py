@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-VERSION = (1, 4, 1)
+VERSION = (1, 4, 2)
 
 default_app_config = 'django_clear_memcache.apps.ClearMemcacheConfig'
 
