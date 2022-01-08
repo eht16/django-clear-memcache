@@ -2,12 +2,7 @@
 
 from django.db import models
 
-try:
-    #django 4.x
-    from django.utils.translation import gettext_lazy as _
-except ImportError:
-    # Older Versions
-    from django.utils.translation import ugettext_lazy as _
+from django_clear_memcache import _
 
 
 ########################################################################
