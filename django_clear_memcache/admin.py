@@ -2,11 +2,17 @@
 
 import json
 
-from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
+
+try:
+    #django 4.x
+    from django.utils.translation import gettext_lazy as _
+except ImportError:
+    # Older Versions
+    from django.utils.translation import ugettext_lazy as _
 
 from django_clear_memcache.clear import ClearMemcacheController, ClearMemcacheNoCacheFoundError
 from django_clear_memcache.models import ClearMemcache
@@ -45,8 +51,8 @@ class ClearMemcacheAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = admin.ModelAdmin.get_urls(self)
         my_urls = [
-            url(r'^clear/$', self.admin_site.admin_view(self.clear), name='clear_cache'),
-            url(r'^list/$', self.admin_site.admin_view(self.list_cache_items), name='cache_list_keys'),
+            path(r'clear/', self.admin_site.admin_view(self.clear), name='clear_cache'),
+            path(r'list/', self.admin_site.admin_view(self.list_cache_items), name='cache_list_keys'),
         ]
         return my_urls + urls
 
